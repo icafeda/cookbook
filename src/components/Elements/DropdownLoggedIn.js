@@ -8,21 +8,17 @@ export const DropdownLoggedIn = ({ closeMenu }) => {
   const { token, logout, setUser, user } = useLoginRegister();
   const cbid = user?.id;
 
-  useEffect(() => { 
-    async function fetchData() { 
-      const data = await getUserService(token,cbid);
+  
+  useEffect(() => {
+    async function fetchData() {
+      const data = await getUserService(token, cbid);
       data.email ? setUser(data) : logout();
     }
     fetchData();
-  },[])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  // function handleLogout() {
-  //   sessionStorage.removeItem("accessToken");
-  //   sessionStorage.removeItem("cbid");
-  //   navigate("/login");
-  // }
 
-  
   return (
     <div
       id="dropdownAvatar"
@@ -61,7 +57,8 @@ export const DropdownLoggedIn = ({ closeMenu }) => {
             toast.success("Logout successful!");
             closeMenu();
           }}
-          className="cursor-pointer block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+          className="cursor-pointer block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+        >
           Log out
         </span>
       </div>

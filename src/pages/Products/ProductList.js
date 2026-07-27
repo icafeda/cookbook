@@ -35,12 +35,12 @@ const ProductList = () => {
           theme: "colored",
           //transition: Bounce,
         });
-      } finally { 
+      } finally {
         setLoading(false);
-
       }
     }
     fetchProducts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchTerm]);
   return (
     <main className="mt-20">
