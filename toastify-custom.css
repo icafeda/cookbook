@@ -1,0 +1,42 @@
+/* Success */
+.Toastify__toast--success {
+  background-color: #16a34a !important; /* green-600 */
+  color: white !important;
+  font-weight: 600;
+}
+
+/* Error */
+.Toastify__toast--error {
+  background-color: #dc2626 !important; /* red-600 */
+  color: white !important;
+  font-weight: 600;
+}
+
+/* Warning */
+.Toastify__toast--warning {
+  background-color: #f59e0b !important; /* yellow-500 */
+  color: black !important;
+  font-weight: 600;
+}
+
+/* Info */
+.Toastify__toast--info {
+  background-color: #2563eb !important; /* blue-600 */
+  color: white !important;
+  font-weight: 600;
+}
+
+/* Toast body */
+.Toastify__toast-body {
+  font-size: 14px !important;
+}
+
+/* Close button */
+.Toastify__close-button {
+  color: white !important;
+}
+
+/* Progress bar */
+.Toastify__progress-bar {
+  background-color: white !important;
+}
