@@ -38,6 +38,7 @@ export const Checkout = ({ setCheckout }) => {
   useEffect(() => {
     async function getUser() {
       const data = await getUserService(token, cbid)
+      
       //const data = await response.json(); 
       setUserData(data);
     }

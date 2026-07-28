@@ -9,10 +9,13 @@ export const DropdownLoggedIn = ({ closeMenu }) => {
   const cbid = user?.id;
 
   
+  
   useEffect(() => {
     async function fetchData() {
       const data = await getUserService(token, cbid);
       data.email ? setUser(data) : logout();
+
+      console.log(cbid);
     }
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps

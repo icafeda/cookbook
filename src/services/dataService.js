@@ -9,9 +9,10 @@ export async function getUserService(token, cbid) {
         Authorization: `Bearer ${token}`,
       },
     };
-     const response = await fetch(`http://localhost:3001/600/users/${cbid}`,
+     const response = await fetch(
+       `${process.env.REACT_APP_HOST}/600/users/${cbid}`,
        requestOption,
-  );
+     );
   
    if (!response.ok) {
      throw HttpError(response.statusText, response.status);
@@ -30,9 +31,9 @@ export async function getUserOrder(token, cbid) {
       },
     };
  const response = await fetch(
-   `http://localhost:3001/660/orders?user.id=${cbid}`,
+   `${process.env.REACT_APP_HOST}/660/orders?user.id=${cbid}`,
    requestOption,
-  );
+ );
 
   if (!response.ok) {
     throw HttpError(response.statusText, response.status);
@@ -54,14 +55,17 @@ export async function createOrder(cartList, totalAmount,cbid, userData, token) {
           },
         };
           
-        const response = await fetch(`http://localhost:3001/660/orders`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
+        const response = await fetch(
+          `${process.env.REACT_APP_HOST}/660/orders`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify(order),
           },
-          body: JSON.stringify(order),
-        });
+        );
     
   if (!response.ok) {
     throw HttpError(response.statusText, response.status);

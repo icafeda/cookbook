@@ -2,7 +2,7 @@ import { HttpError } from "../utils/HttpError";
 
 export async function getProductList(searchTerm) {
   const response = await fetch(
-    `http://localhost:3001/444/products?name_like=${searchTerm ? searchTerm : ""}`,
+    `${process.env.REACT_APP_HOST}/444/products?name_like=${searchTerm ? searchTerm : ""}`,
   );
 
   if (!response.ok) {
@@ -14,7 +14,9 @@ export async function getProductList(searchTerm) {
 }
 
 export async function getProduct(idRoute) {
-  const response = await fetch(`http://localhost:3001/444/products/${idRoute}`);
+  const response = await fetch(
+    `${process.env.REACT_APP_HOST}/444/products/${idRoute}`,
+  );
   if (!response.ok) {
     //throw { message: response.statusText, status: response.status };
      throw HttpError(response.statusText, response.status);
@@ -24,7 +26,9 @@ export async function getProduct(idRoute) {
 }
 
 export async function getFeaturedProduct() {
-  const response = await fetch("http://localhost:3001/444/featured_products");
+  const response = await fetch(
+    `${process.env.REACT_APP_HOST}/444/featured_products`,
+  );
   if (!response.ok) {
     //throw { message: response.statusText, status: response.status };
      throw HttpError(response.statusText, response.status);
