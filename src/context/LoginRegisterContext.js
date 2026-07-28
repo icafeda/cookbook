@@ -3,15 +3,22 @@ import { loginRegisterReducer } from "../reducers/loginRegisterReducers";
 import { CartContext } from "./CartContext";
 
 //Lây token và user ra
-const loginRegisterInitiateState = {};
+// ⭐ Lấy user/token từ localStorage an toàn
+const rawUser = localStorage.getItem("user");
+const rawToken = localStorage.getItem("token");
+
+const loginRegisterInitiateState = {
+  user: rawUser && rawUser !== "undefined" ? JSON.parse(rawUser) : null,
+  token: rawToken && rawToken !== "undefined" ? rawToken : null,
+};
 
 const LoginRegisterContext = createContext(loginRegisterInitiateState);
 
 export const LoginRegisterProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(loginRegisterReducer, {
-    user: JSON.parse(localStorage.getItem("user")) || null,
-    token: localStorage.getItem("token") || null,
-  });
+  const [state, dispatch] = useReducer(
+    loginRegisterReducer,
+    loginRegisterInitiateState,
+  );
 
   const { clearCart } = useContext(CartContext);
 
