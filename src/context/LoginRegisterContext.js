@@ -12,7 +12,7 @@ const loginRegisterInitiateState = {
   token: rawToken && rawToken !== "undefined" ? rawToken : null,
 };
 
-const LoginRegisterContext = createContext(loginRegisterInitiateState);
+const LoginRegisterContext = createContext({});
 
 export const LoginRegisterProvider = ({ children }) => {
   const [state, dispatch] = useReducer(
