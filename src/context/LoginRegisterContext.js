@@ -3,38 +3,35 @@ import { loginRegisterReducer } from "../reducers/loginRegisterReducers";
 import { CartContext } from "./CartContext";
 
 //Lây token và user ra
-const loginRegisterInitiateState = {
-  user: JSON.parse(localStorage.getItem("user")) || null,
-  token: localStorage.getItem("token") || null,
-};
+const loginRegisterInitiateState = {};
 
 const LoginRegisterContext = createContext(loginRegisterInitiateState);
 
 export const LoginRegisterProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(
-    loginRegisterReducer,
-    loginRegisterInitiateState,
-  );
+  const [state, dispatch] = useReducer(loginRegisterReducer, {
+    user: JSON.parse(localStorage.getItem("user")) || null,
+    token: localStorage.getItem("token") || null,
+  });
 
   const { clearCart } = useContext(CartContext);
 
   // -- ACTIONS -- //
-    function login(user, token) {
-      // ⭐ Lưu vào localStorage
-      localStorage.setItem("user", JSON.stringify(user));
-      localStorage.setItem("token", token);
-      // const login = {
-      //   user,
-      //   token,
-      // };
-      dispatch({
-        type: "LOGIN",
-        payload: { user, token },
-      });
-    }
+  function login(user, token) {
+    // ⭐ Lưu vào localStorage
+    localStorage.setItem("user", JSON.stringify(user));
+    localStorage.setItem("token", token);
+    // const login = {
+    //   user,
+    //   token,
+    // };
+    dispatch({
+      type: "LOGIN",
+      payload: { user, token },
+    });
+  }
 
-    function setUser(user) {
-      localStorage.setItem("user", JSON.stringify(user));
+  function setUser(user) {
+    localStorage.setItem("user", JSON.stringify(user));
     dispatch({
       type: "SET_USER",
       payload: user,
@@ -45,8 +42,8 @@ export const LoginRegisterProvider = ({ children }) => {
     clearCart();
     // ⭐ Xóa localStorage
     localStorage.removeItem("user");
-      localStorage.removeItem("token");
-      
+    localStorage.removeItem("token");
+
     dispatch({
       type: "LOGOUT",
     });
