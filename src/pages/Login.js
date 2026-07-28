@@ -26,10 +26,10 @@ export const Login = () => {
     if (data.accessToken) {
     //store statement into localStorage
      localStorage.setItem("token", data.accessToken);
-     localStorage.setItem("user", JSON.stringify(data.user.id));
+     localStorage.setItem("user", JSON.stringify(data.user));
 
       //Pass statement login into context
-      login(data.user.id, data.accessToken); // ⭐ BẮT BUỘC
+      login(data.user, data.accessToken); // ⭐ BẮT BUỘC
       
      toast.success("Login successful!");
 

@@ -1,13 +1,17 @@
 import { useCart, useLoginRegister } from "../../../context";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getUserService, createOrder} from "../../../services";
+import { getUserService, createOrder } from "../../../services";
 
 export const Checkout = ({ setCheckout }) => {
   const navigate = useNavigate();
   const { cartList, totalAmount, clearCart } = useCart();
-  const { token, user } = useLoginRegister();
-  const cbid = user?.id;
+  // const { token, user } = useLoginRegister();
+  // const cbid = user?.id;
+  const rawUser = localStorage.getItem("user");
+  const cbid = rawUser?.id;
+  const rawToken = localStorage.getItem("token");
+
   const [userData, setUserData] = useState(null);
 
   //handle submit
@@ -15,36 +19,35 @@ export const Checkout = ({ setCheckout }) => {
     e.preventDefault();
     // Handle form submission logic here
 
-    try {  
-    
-     const databind = await createOrder(
-       cartList,
-       totalAmount,
-       cbid,
-       userData,
-       token,
-     );
-      
-    setUserData(databind);
-    clearCart();
-    setCheckout(false);
-    navigate("/order-summary", { state: { data: databind, status: true } });
+    try {
+      const databind = await createOrder(
+        cartList,
+        totalAmount,
+        cbid,
+        userData,
+        //rawToken,
+        rawToken,
+      );
+
+      setUserData(databind);
+      clearCart();
+      setCheckout(false);
+      navigate("/order-summary", { state: { data: databind, status: true } });
     } catch (error) {
       navigate("/order-summary", { state: { status: false } });
-    //console.error("Order submission failed:", error);
+      //console.error("Order submission failed:", error);
+    }
   }
-}
-
 
   useEffect(() => {
     async function getUser() {
-      const data = await getUserService(token, cbid)
-      
-      //const data = await response.json(); 
+      const data = await getUserService(rawToken, cbid);
+
+      //const data = await response.json();
       setUserData(data);
     }
     getUser();
-  }, [token, cbid]);
+  }, [rawToken, cbid]);
 
   return (
     <section>
