@@ -10,6 +10,7 @@ export const Checkout = ({ setCheckout }) => {
   const cbid = user?.id;
   const [userData, setUserData] = useState(null);
 
+  //handle submit
   async function handleOrderSubmit(e) {
     e.preventDefault();
     // Handle form submission logic here
