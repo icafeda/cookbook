@@ -23,8 +23,14 @@ export const Login = () => {
     };
 
     const data = await loginService(authDetail);
-   if (data.accessToken) {
-     login(data.user, data.accessToken); // ⭐ BẮT BUỘC
+    if (data.accessToken) {
+    //store statement into localStorage
+     localStorage.setItem("token", data.accessToken);
+     localStorage.setItem("user", JSON.stringify(data.user));
+
+      //Pass statement login into context
+      login(data.user, data.accessToken); // ⭐ BẮT BUỘC
+      
      toast.success("Login successful!");
 
      const from = location.state?.from || "/";
